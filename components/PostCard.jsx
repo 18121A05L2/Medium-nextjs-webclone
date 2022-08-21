@@ -8,7 +8,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import {db} from "../firebase"
 
 const styles = {
-    container: "flex py-2 px-10 max-w-[45rem] ",
+    container: "flex py-2 px-10 max-w-[45rem] cursor-pointer ",
     left: "p-2",
     right:"flex p-2",
     top: "flex items-center",

@@ -16,11 +16,11 @@ export default function Post() {
       return;
     } else {
       setPost(posts.find((item) => item.id === router.query.slug));
-      console.log(post,"✅")
+      // console.log(post,"✅")
       post && setAuthor(users.find((user) => user.id === post.data.author));
     }
   }, [posts, users, post, author,router.query.slug]);
-  console.log(post,author)
+  // console.log(post,author)
 
   return (
     <div className="flex">

@@ -5,6 +5,7 @@ import { MediumContext } from "../context/MediumContext";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import PostModal from "./PostModal";
 
 Modal.setAppElement("#__next");
 
@@ -67,7 +68,7 @@ export default function Header() {
         onRequestClose={() => router.push("/")}
         style={customStyles}
       >
-        <div>This is modal</div>
+        <PostModal></PostModal>
       </Modal>
     </div>
   );
