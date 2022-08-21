@@ -25,7 +25,6 @@ export default function PostCard({ post }) {
       (await getDoc(doc(db,"users",post.data.author))).data() )
     }
     getAuthorData()
-    console.log(authorData)
       
     },[post])
     

@@ -1,27 +1,32 @@
-import React, { useContext, useEffect, useState } from 'react'
-import ArticleMain from '../../components/ArticleMain'
-import ReadersNav from "../../components/Readersnav"
-import Recomondations from '../../components/Recomondations'
-import { MediumContext } from '../../context/MediumContext'
-import {useRouter} from "next/router"
-import { AuthErrorCodes } from 'firebase/auth'
+import React, { useContext, useEffect, useState } from "react";
+import ArticleMain from "../../components/ArticleMain";
+import ReadersNav from "../../components/Readersnav";
+import Recomondations from "../../components/Recomondations";
+import { MediumContext } from "../../context/MediumContext";
+import { useRouter } from "next/router";
 
 export default function Post() {
-  const { posts, users } = useContext(MediumContext)
+  const { posts, users } = useContext(MediumContext);
   const [post, setPost] = useState();
-  const [Author , setAuthor] = useState();
+  const [author, setAuthor] = useState();
   const router = useRouter();
-  console.log(post);
+
   useEffect(() => {
-    posts &&
-    setPost(posts.find(post => posts.id === router.query.slug))
-  },[])
+    if (!posts || !users) {
+      return;
+    } else {
+      setPost(posts.find((item) => item.id === router.query.slug));
+      console.log(post,"✅")
+      post && setAuthor(users.find((user) => user.id === post.data.author));
+    }
+  }, [posts, users, post, author,router.query.slug]);
+  console.log(post,author)
+
   return (
     <div className="flex">
       <ReadersNav />
-      <ArticleMain  />
-      <Recomondations/>
-    
+      <ArticleMain post={post} author={author} />
+      <Recomondations />
     </div>
-  )
+  );
 }

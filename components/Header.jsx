@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import Logo from "../static/logo.png";
+import { MediumContext } from "../context/MediumContext";
+import Modal from "react-modal";
+import { useRouter } from "next/router";
+import Link from "next/link";
+
+Modal.setAppElement("#__next");
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 const styles = {
   wrapper: "flex justify-center p-5  gap-5 bg-[#FCC017]",
@@ -12,6 +29,8 @@ const styles = {
 };
 
 export default function Header() {
+  const router = useRouter();
+  const { handleAuth, currentUser, handleSignOut } = useContext(MediumContext);
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
@@ -27,10 +46,29 @@ export default function Header() {
         <div className={styles.bannerNav}>
           <div>Our story</div>
           <div>Membership</div>
-          <div>Sign In</div>
+
+          {currentUser && (
+            <Link href="/?addNew=1">
+              <div className={styles.accentedButton}>Write</div>
+            </Link>
+          )}
+
+          {currentUser && (
+            <div className={styles.accentedButton} onClick={handleSignOut}>
+              SignOut
+            </div>
+          )}
+          {!currentUser && <div onClick={handleAuth}>Sign In</div>}
           <div className={styles.accentedButton}>Get Started</div>
         </div>
       </div>
+      <Modal
+        isOpen={Boolean(router.query.addNew)}
+        onRequestClose={() => router.push("/")}
+        style={customStyles}
+      >
+        <div>This is modal</div>
+      </Modal>
     </div>
   );
 }

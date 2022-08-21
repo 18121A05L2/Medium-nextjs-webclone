@@ -1,13 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import { collection, getDocs, setDoc, doc } from "firebase/firestore";
-import { db } from "../firebase";
-import MyApp from "../pages/_app";
+import { db, auth, provider } from "../firebase";
+import { signInWithPopup ,signOut } from "firebase/auth";
 
 const MediumContext = createContext();
 
 const MediumProvider = ({ children }) => {
   const [users, setUsers] = useState();
   const [posts, setPosts] = useState();
+  const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
     const getUsers = async () => {
@@ -41,8 +42,7 @@ const MediumProvider = ({ children }) => {
               postLength: doc.data().postLength,
               title: doc.data().title,
               postedOn: doc.data().postedOn.toDate(),
-              bannerImage:doc.data().bannerImage
-              
+              bannerImage: doc.data().bannerImage,
             },
           };
         })
@@ -51,8 +51,33 @@ const MediumProvider = ({ children }) => {
     getPosts();
   }, []);
 
+  const handleAuth = async () => {
+    const userData = await signInWithPopup(auth, provider);
+    const user = userData.user;
+    setCurrentUser(user);
+    addUserToFirebase(user);
+  };
+
+  const addUserToFirebase = async (user) => {
+
+    await setDoc(doc(db, "users", user.email), {
+      email: user.email,
+      name: user.displayName,
+      image: user.photoURL,
+      followerCount: 0,
+    });
+  };
+
+  const handleSignOut = async () => {
+    await signOut(auth);
+
+    setCurrentUser(null);
+
+
+  }
+
   return (
-    <MediumContext.Provider value={{ posts, users }}>
+    <MediumContext.Provider value={{ posts, users, handleAuth , currentUser,handleSignOut }}>
       {children}
     </MediumContext.Provider>
   );

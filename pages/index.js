@@ -7,6 +7,7 @@ import { MediumContext } from "../context/MediumContext";
 export default function Home() {
   const { posts, users } = useContext(MediumContext);
 
+
   return (
     <>
       <Header />
