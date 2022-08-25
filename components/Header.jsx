@@ -26,7 +26,7 @@ const styles = {
   logoContainer: "flex items-center flex-start",
   logo: " cursor-pointer object-contain",
   bannerNav: "flex cursor-pointer items-center space-x-8 ",
-  accentedButton: "bg-black text-white py-2 px-4 rounded-full",
+  accentedButton: "hidden md:flex bg-black text-white py-2 px-4 rounded-full",
 };
 
 export default function Header() {
@@ -45,11 +45,11 @@ export default function Header() {
           />
         </div>
         <div className={styles.bannerNav}>
-          <div>Our story</div>
-          <div>Membership</div>
+          <div className="hidden md:flex">Our story</div>
+          <div className="hidden md:flex">Membership</div>
 
           {currentUser && (
-            <Link href="/?addNew=1">
+            <Link href="/?addNew=1" passHref>
               <div className={styles.accentedButton}>Write</div>
             </Link>
           )}
@@ -59,7 +59,14 @@ export default function Header() {
               SignOut
             </div>
           )}
-          {!currentUser && <div onClick={handleAuth}>Sign In</div>}
+          {!currentUser && (
+            <div
+              className="border border-black px-4 py-1 rounded-full sm:text-2xl md:text-xl"
+              onClick={handleAuth}
+            >
+              Sign In
+            </div>
+          )}
           <div className={styles.accentedButton}>Get Started</div>
         </div>
       </div>
