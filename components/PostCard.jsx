@@ -64,7 +64,7 @@ export default function PostCard({ post, currentUser }) {
         <div className={styles.right}>
           <FiBookmark className="h-8 w-8 mt-auto mx-3 cursor-pointer" />
           <Image
-            className="object-cover border border-black rounded-[1rem] -z-10"
+            className="object-cover border border-black rounded-[1rem] "
             src={post.data.bannerImage}
             alt="Tutorial"
             width="250"

@@ -19,7 +19,7 @@ export default function Banner() {
           <button className={styles.accentedButton}>Start Reading</button>
         </div>
         <Image
-          className="object-contain h-32 flex-1 -z-10"
+          className="object-contain h-32 flex-1 "
           src={Logo}
           alt="Logo"
           width="500"
