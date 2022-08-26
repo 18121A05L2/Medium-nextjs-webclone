@@ -8,7 +8,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const styles = {
-  container: "flex justify-between my-3 mx-10 max-w-[45rem] cursor-pointer border border-yellow-200 rounded-[1rem] p-2",
+  container:
+    "flex justify-between my-3 mx-10 max-w-[45rem] cursor-pointer border border-yellow-200 rounded-[1rem] p-2",
   left: "p-2",
   right: "flex",
   top: "flex items-center",
@@ -16,7 +17,7 @@ const styles = {
   bottom: " text-[.9rem] my-1",
 };
 
-export default function PostCard({ post,currentUser }) {
+export default function PostCard({ post, currentUser }) {
   // const [authorData, setAuthorData] = useState();
   // author = post.data.author;
 
@@ -32,7 +33,13 @@ export default function PostCard({ post,currentUser }) {
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.top}>
-            <img className="rounded-full" src={currentUser.image || Logo } alt="logo" width="50" height="50" />
+            <img
+              className="rounded-full  "
+              src={(currentUser && currentUser.image) || Logo}
+              alt="logo"
+              width="50"
+              height="50"
+            />
             <h2 className="font-bold text-[1.5rem] text-orange-300 px-4">
               {currentUser && currentUser.name}
             </h2>
@@ -56,7 +63,8 @@ export default function PostCard({ post,currentUser }) {
         </div>
         <div className={styles.right}>
           <FiBookmark className="h-8 w-8 mt-auto mx-3 cursor-pointer" />
-          <Image className="object-cover border border-black rounded-[1rem] "
+          <Image
+            className="object-cover border border-black rounded-[1rem] -z-10"
             src={post.data.bannerImage}
             alt="Tutorial"
             width="250"
@@ -67,4 +75,3 @@ export default function PostCard({ post,currentUser }) {
     </Link>
   );
 }
-

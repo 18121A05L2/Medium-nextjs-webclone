@@ -2,30 +2,52 @@ import { createContext, useEffect, useState } from "react";
 import { collection, getDocs, setDoc, doc } from "firebase/firestore";
 import { db, auth, provider } from "../firebase";
 import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import useSWR from "swr";
 
 const MediumContext = createContext();
 
 const MediumProvider = ({ children }) => {
   const [users, setUsers] = useState();
-  const [posts, setPosts] = useState();
   const [currentUser, setCurrentUser] = useState();
 
-  useEffect(() => {
-    const getUsers = async () => {
-      const querySnapshot = await getDocs(collection(db, "users"));
-      setUsers(
-        querySnapshot.docs.map((doc) => {
-          return {
-            id: doc.id,
-            data: {
-              ...doc.data(),
-            },
-          };
-        })
-      );
-    };
-    getUsers();
-  }, []);
+  const fetcher = async () => {
+    const querySnapshot = await getDocs(collection(db, "articles"));
+    return querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        data: {
+          author: doc.data().author,
+          body: doc.data().body,
+          brief: doc.data().brief,
+          category: doc.data().category,
+          postLength: doc.data().postLength,
+          title: doc.data().title,
+          postedOn: doc.data().postedOn.toDate(),
+          bannerImage: doc.data().bannerImage,
+        },
+      };
+    });
+  };
+
+  const { data: posts, error } = useSWR("posts", fetcher);
+  console.log(posts, "posts with swr❤️‍🔥");
+
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     const querySnapshot = await getDocs(collection(db, "users"));
+  //     setUsers(
+  //       querySnapshot.docs.map((doc) => {
+  //         return {
+  //           id: doc.id,
+  //           data: {
+  //             ...doc.data(),
+  //           },
+  //         };
+  //       })
+  //     );
+  //   };
+  //   getUsers();
+  // }, []);
 
   // useEffect(() => {
   //   const getPosts = async () => {

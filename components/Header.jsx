@@ -21,7 +21,7 @@ const customStyles = {
 };
 
 const styles = {
-  wrapper: "flex justify-center p-5  gap-5 bg-[#FCC017]",
+  wrapper: "flex justify-center p-5  gap-5 bg-[#FCC017] sticky left-0 right-0 top-0 shadow-md z-100 ",
   content: " flex justify-between flex-1 gap-10 ",
   logoContainer: "flex items-center flex-start",
   logo: " cursor-pointer object-contain",
@@ -71,6 +71,7 @@ export default function Header() {
         </div>
       </div>
       <Modal
+        className=""
         isOpen={Boolean(router.query.addNew)}
         onRequestClose={() => router.push("/")}
         style={customStyles}

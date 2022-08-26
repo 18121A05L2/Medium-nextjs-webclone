@@ -4,7 +4,7 @@ import Logo from "../static/banner.png"
 
 const styles = {
     accentedButton: "bg-black text-white py-2 px-4 rounded-full",
-    content:"flex flex-1 justify-between items-center bg-[#FCC017] h-max-[10rem] border-y border-black px-10 py-2"
+    content:"flex flex-1 justify-between items-center bg-[#FCC017] h-max-[10rem] border-b border-black px-10 py-2"
 };
 export default function Banner() {
     return (
@@ -17,8 +17,14 @@ export default function Banner() {
             Discover stories,thinking and expertise from writers on any topic.{" "}
           </h3>
           <button className={styles.accentedButton}>Start Reading</button>
-            </div>
-            <Image className="object-contain h-32 flex-1" src={Logo} alt ="Logo" width="500" height="400"></Image>
+        </div>
+        <Image
+          className="object-contain h-32 flex-1 -z-10"
+          src={Logo}
+          alt="Logo"
+          width="500"
+          height="400"
+        ></Image>
       </div>
     );
 }
