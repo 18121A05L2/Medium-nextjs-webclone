@@ -9,7 +9,7 @@ import { db } from "../firebase";
 
 const styles = {
   container:
-    "flex justify-between my-3 mx-10 max-w-[45rem] cursor-pointer border-2 border-blue-300 rounded-[1rem] p-2 bg-indigo-100",
+    "flex justify-between my-3 mx-10 max-w-[45rem] cursor-pointer border-2 hover:border-4 hover:border-blue-600 hover:p-[6px] border-blue-300 rounded-[1rem] p-2 bg-indigo-100",
   left: "p-2",
   right: "flex",
   top: "flex items-center",
