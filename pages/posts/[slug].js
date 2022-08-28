@@ -3,27 +3,27 @@ import ArticleMain from "../../components/ArticleMain";
 import ReadersNav from "../../components/Readersnav";
 import Recomondations from "../../components/Recomondations";
 import { MediumContext } from "../../context/MediumContext";
-import { useRouter } from "next/router";
+
 
 export default function Post() {
-  const { posts, users } = useContext(MediumContext);
-  const [post, setPost] = useState();
-  const [author, setAuthor] = useState();
-  const router = useRouter();
+  
+  
+  
 
-  useEffect(() => {
-    if (!posts || !users) {
-      return;
-    } else {
-      setPost(posts.find((item) => item.id === router.query.slug));
-      post && setAuthor(users.find((user) => user.id === post.data.author));
-    }
-  }, [posts, users, post, author,router.query.slug]);
+
+  // useEffect(() => {
+  //   if (!posts || !users) {
+  //     return;
+  //   } else {
+  //     setPost(posts.find((item) => item.id === router.query.slug));
+  //     post && setAuthor(users.find((user) => user.id === post.data.author));
+  //   }
+  // }, [posts, users, post, author,router.query.slug]);
 
   return (
-    <div className="flex">
+    <div className="flex bg-gray-100 h-100%">
       <ReadersNav />
-      <ArticleMain post={post} author={author} />
+      <ArticleMain   />
       <Recomondations />
     </div>
   );

@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-export default function UploadingImage({handleUploadingImage}) {
+export default function UploadingImage({ handleUploadingImage }) {
   const [data, setData] = useState();
+  const [imageUrl, setImageUrl] = useState();
   async function handleStorage() {
-    const storageRef = ref(storage, `images/${data.name}`);
+    const storageRef = ref(storage, `images/${data?.name}`);
     const uploadTask = uploadBytesResumable(storageRef, data);
-
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -33,24 +33,24 @@ export default function UploadingImage({handleUploadingImage}) {
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log("File available at", downloadURL);
+          setImageUrl(downloadURL);
         });
       }
     );
-    }
-    handleUploadingImage(handleStorage)
+  }
+  handleUploadingImage(handleStorage, imageUrl);
 
   return (
     <div className="flex w-[30rem] text-[1.23rem] ">
       <span className="whitespace-nowrap mr-[5.7rem]">Upload from pc</span>
       <input
-        className=""
+        className=" file:bg-blue-300 file:border-none file:rounded-full file:px-3 file:active:bg-blue-200 file:transition-all"
         type="file"
         onChange={(e) => setData(e.target.files[0])}
       ></input>
       <button
         className=" hidden font-bold text-[1.2rem] bg-black text-white px-5 py-1 rounded-full"
         type="submit"
-        onClick={handleStorage}
       >
         {/*getUrl*/}
       </button>

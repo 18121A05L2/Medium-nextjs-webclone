@@ -9,7 +9,7 @@ import { db } from "../firebase";
 
 const styles = {
   container:
-    "flex justify-between my-3 mx-10 max-w-[45rem] cursor-pointer border border-yellow-200 rounded-[1rem] p-2",
+    "flex justify-between my-3 mx-10 max-w-[45rem] cursor-pointer border-2 border-blue-300 rounded-[1rem] p-2 bg-indigo-100",
   left: "p-2",
   right: "flex",
   top: "flex items-center",
@@ -27,21 +27,28 @@ export default function PostCard({ post, currentUser }) {
   //   };
   //   getAuthorData();
   // }, [post]);
+  // console.log(post.data.image)
+  // console.log(
+  //   new Date(post.data.postedOn.seconds).toLocaleString("en-US", {
+  //     timeZone: "Asia/Jakarta",
+  //   })
+  // );
+  console.log(post.data.userImage)
 
   return (
     <Link href={`/posts/${post.id}`} passHref>
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.top}>
-            <img
+            <Image
               className="rounded-full  "
-              src={(currentUser && currentUser.image) || Logo}
+              src={post.data.userImage || Logo}
               alt="logo"
               width="50"
               height="50"
             />
             <h2 className="font-bold text-[1.5rem] text-orange-300 px-4">
-              {currentUser && currentUser.name}
+              {post.data.name}
             </h2>
           </div>
           <div className={styles.middle}>
@@ -50,12 +57,9 @@ export default function PostCard({ post, currentUser }) {
           </div>
           <div className={styles.bottom}>
             <span>
-              {new Date(post.data.postedOn).toLocaleString("en-US", {
-                day: "numeric",
-                month: "short",
-              })}{" "}
+              {new Date(post.data.postedOn).toLocaleString("en-US")}{" "}
               . {post.data.postLength} min read .{" "}
-              <span className="bg-[#F2F2F2] p-1 px-3 rounded-full">
+              <span className="bg-blue-300 p-1 px-3 rounded-full">
                 {post.data.category}
               </span>{" "}
             </span>

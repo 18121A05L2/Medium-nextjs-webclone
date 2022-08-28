@@ -6,9 +6,9 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-    mediumSerif:["charter"]
+      mediumSerif: ["charter"],
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };

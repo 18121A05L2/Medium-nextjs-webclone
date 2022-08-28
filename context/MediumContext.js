@@ -7,7 +7,6 @@ import useSWR from "swr";
 const MediumContext = createContext();
 
 const MediumProvider = ({ children }) => {
-  const [users, setUsers] = useState();
   const [currentUser, setCurrentUser] = useState();
 
   const fetcher = async () => {
@@ -22,56 +21,17 @@ const MediumProvider = ({ children }) => {
           category: doc.data().category,
           postLength: doc.data().postLength,
           title: doc.data().title,
-          postedOn: doc.data().postedOn.toDate(),
+          postedOn: doc.data().postedOn,
           bannerImage: doc.data().bannerImage,
+          image: doc.data().userImage,
+          name: doc.data().name,
         },
       };
     });
   };
 
   const { data: posts, error } = useSWR("posts", fetcher);
-  console.log(posts, "posts with swr❤️‍🔥");
 
-  // useEffect(() => {
-  //   const getUsers = async () => {
-  //     const querySnapshot = await getDocs(collection(db, "users"));
-  //     setUsers(
-  //       querySnapshot.docs.map((doc) => {
-  //         return {
-  //           id: doc.id,
-  //           data: {
-  //             ...doc.data(),
-  //           },
-  //         };
-  //       })
-  //     );
-  //   };
-  //   getUsers();
-  // }, []);
-
-  // useEffect(() => {
-  //   const getPosts = async () => {
-  //     const querySnapshot = await getDocs(collection(db, "articles"));
-  //     setPosts(
-  //       querySnapshot.docs.map((doc) => {
-  //         return {
-  //           id: doc.id,
-  //           data: {
-  //             author: doc.data().author,
-  //             body: doc.data().body,
-  //             brief: doc.data().brief,
-  //             category: doc.data().category,
-  //             postLength: doc.data().postLength,
-  //             title: doc.data().title,
-  //             postedOn: doc.data().postedOn.toDate(),
-  //             bannerImage: doc.data().bannerImage,
-  //           },
-  //         };
-  //       })
-  //     );
-  //   };
-  //   getPosts();
-  // }, []);
 
   const handleAuth = async () => {
     const userData = await signInWithPopup(auth, provider);
@@ -101,7 +61,7 @@ const MediumProvider = ({ children }) => {
 
   return (
     <MediumContext.Provider
-      value={{ posts, users, handleAuth, currentUser, handleSignOut }}
+      value={{ posts, handleAuth, currentUser, handleSignOut }}
     >
       {children}
     </MediumContext.Provider>

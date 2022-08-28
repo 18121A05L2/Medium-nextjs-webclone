@@ -4,7 +4,7 @@ import Logo from "../static/banner.png"
 
 const styles = {
     accentedButton: "bg-black text-white py-2 px-4 rounded-full",
-    content:"flex flex-1 justify-between items-center bg-[#FCC017] h-max-[10rem] border-b border-black px-10 py-2"
+    content:"flex flex-1 justify-between items-center bg-[#FCC017] h-max-[10rem] px-10 py-2"
 };
 export default function Banner() {
     return (

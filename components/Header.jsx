@@ -21,7 +21,8 @@ const customStyles = {
 };
 
 const styles = {
-  wrapper: "flex justify-center p-5  gap-5 bg-[#FCC017] sticky left-0 right-0 top-0 shadow-md z-100 ",
+  wrapper:
+    "flex justify-center p-5  gap-5 bg-[#FCC017] sticky left-0 right-0 top-0 shadow-md z-50  isolate ",
   content: " flex justify-between flex-1 gap-10 ",
   logoContainer: "flex items-center flex-start",
   logo: " cursor-pointer object-contain",
@@ -61,7 +62,7 @@ export default function Header() {
           )}
           {!currentUser && (
             <div
-              className="border border-black px-4 py-1 rounded-full sm:text-2xl md:text-xl"
+              className="border-2 border-black px-4 py-1 rounded-full sm:text-2xl md:text-xl hover:bg-yellow-400"
               onClick={handleAuth}
             >
               Sign In
