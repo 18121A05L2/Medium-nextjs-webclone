@@ -14,7 +14,7 @@ export default function ArticleMain() {
   console.log(commented);
   const { posts } = useContext(MediumContext);
   const router = useRouter();
-  const post = posts.filter((post) => post.id === router.query.slug)[0];
+  const post = posts?.filter((post) => post.id === router.query.slug)[0];
   const {
     register,
     handleSubmit,
@@ -33,20 +33,20 @@ export default function ArticleMain() {
           height="100"
           width="100"
         ></Image>
-        <h2 className="font-bold text-3xl ">{post.data?.name}</h2>
+        <h2 className="font-bold text-3xl ">{post && post.data?.name}</h2>
       </div>
       <div>
         <Image
           className="rounded-lg"
-          src={post.data.bannerImage || Lucky}
+          src={(post && post.data?.bannerImage) }
           alt="banner"
           height="300"
           width="500"
         />
-        <div className="text-3xl font-bold">{post.data?.title} </div>
+        <div className="text-3xl font-bold">{post && post.data?.title} </div>
         <div className="">
           {" "}
-          Author : {post.data?.name} ,{" "}
+          Author : {post && post.data?.name} ,{" "}
           {post &&
             new Date(post.data?.postedOn).toLocaleString("en-US", {
               day: "numeric",
@@ -54,8 +54,8 @@ export default function ArticleMain() {
               year: "numeric",
             })}
         </div>
-        <div>Brief:{post.data?.brief}</div>
-        <div>{post.data?.body}</div>
+        <div>Brief:{post && post.data?.brief}</div>
+        <div>{post && post.data?.body}</div>
       </div>
       <hr className="border border-yellow-500" />
 
@@ -63,11 +63,10 @@ export default function ArticleMain() {
 
       <form
         className=" flex flex-col"
-        onSubmit={handleSubmit(async (data) => {
-          console.log(data);
-          errors.length ||  setCommented(true);
-          await addDoc(collection(db, "comments"), data);
-          data = {};
+        onSubmit={handleSubmit(async (dataa) => {
+          errors.length || setCommented(true);
+          await addDoc(collection(db, "comments"), dataa);
+          dataa = {};
         })}
       >
         {!commented ? (
@@ -113,7 +112,9 @@ export default function ArticleMain() {
             </button>
           </div>
         ) : (
-          <div className="flex bg-yellow-300 p-10 items-center justify-center max-w-[50rem] text-2xl font-semibold" >Thank You For Commenting</div>
+          <div className="flex bg-yellow-300 p-10 items-center justify-center max-w-[50rem] text-2xl font-semibold">
+            Thank You For Commenting
+          </div>
         )}
       </form>
     </div>

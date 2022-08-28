@@ -2,15 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import ArticleMain from "../../components/ArticleMain";
 import ReadersNav from "../../components/Readersnav";
 import Recomondations from "../../components/Recomondations";
-import { MediumContext } from "../../context/MediumContext";
-
 
 export default function Post() {
-  
-  
-  
-
-
   // useEffect(() => {
   //   if (!posts || !users) {
   //     return;
@@ -23,11 +16,8 @@ export default function Post() {
   return (
     <div className="flex bg-gray-100 h-100%">
       <ReadersNav />
-      <ArticleMain   />
+      <ArticleMain />
       <Recomondations />
     </div>
   );
 }
-
-
-
