@@ -18,22 +18,7 @@ const styles = {
 };
 
 export default function PostCard({ post, currentUser }) {
-  // const [authorData, setAuthorData] = useState();
-  // author = post.data.author;
-
-  // useEffect(() => {
-  //   const getAuthorData = async () => {
-  //     setAuthorData((await getDoc(doc(db, "users", post.data.author))).data());
-  //   };
-  //   getAuthorData();
-  // }, [post]);
-  // console.log(post.data.image)
-  // console.log(
-  //   new Date(post.data.postedOn.seconds).toLocaleString("en-US", {
-  //     timeZone: "Asia/Jakarta",
-  //   })
-  // );
-  console.log(post.data.userImage)
+  
 
   return (
     <Link href={`/posts/${post.id}`} passHref>

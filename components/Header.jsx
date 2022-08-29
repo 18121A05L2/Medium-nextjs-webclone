@@ -46,23 +46,28 @@ export default function Header() {
           />
         </div>
         <div className={styles.bannerNav}>
-          <div className="hidden md:flex">Our story</div>
-          <div className="hidden md:flex">Membership</div>
+          <div className="hidden xl:flex">Our story</div>
+          <div className="hidden xl:flex">Membership</div>
 
           {currentUser && (
             <Link href="/?addNew=1" passHref>
-              <div className={styles.accentedButton}>Write</div>
+              <div className=" bg-black text-white py-2 px-4 rounded-full hover:scale-110 transition-all">
+                Write
+              </div>
             </Link>
           )}
 
           {currentUser && (
-            <div className={styles.accentedButton} onClick={handleSignOut}>
+            <div
+              className=" bg-black text-white py-2 px-4 rounded-full hover:scale-110 transition-all transform"
+              onClick={handleSignOut}
+            >
               SignOut
             </div>
           )}
           {!currentUser && (
             <div
-              className="border-2 border-black px-4 py-1 rounded-full sm:text-2xl md:text-xl hover:bg-yellow-400"
+              className=" bg-black text-white px-4 py-1 rounded-full sm:text-2xl md:text-xl hover:scale-110 transition-all active:opacity-70"
               onClick={handleAuth}
             >
               Sign In
@@ -71,14 +76,16 @@ export default function Header() {
           <div className={styles.accentedButton}>Get Started</div>
         </div>
       </div>
-      <Modal
-        className=""
-        isOpen={Boolean(router.query.addNew)}
-        onRequestClose={() => router.push("/")}
-        style={customStyles}
-      >
-        <PostModal></PostModal>
-      </Modal>
+      {currentUser && (
+        <Modal
+          className=""
+          isOpen={Boolean(router.query.addNew)}
+          onRequestClose={() => router.push("/")}
+          style={customStyles}
+        >
+          <PostModal></PostModal>
+        </Modal>
+      )}
     </div>
   );
 }
